@@ -1,2 +1,2 @@
 # gdo6-statistics
-Usage statstics module for gdo6.
+Simple usage statstics module for gdo6.
