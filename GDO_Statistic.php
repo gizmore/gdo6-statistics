@@ -12,6 +12,8 @@ final class GDO_Statistic extends GDO
 {
 	public function gdoEngine() { return GDO::MYISAM; }
 	
+	public function gdoCached() { return false; }
+	
 	public function gdoColumns()
 	{
 		return array(
