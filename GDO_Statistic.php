@@ -25,9 +25,9 @@ final class GDO_Statistic extends GDO
 	{
 		return array(
 			GDT_Date::make('ph_day')->primary(),
-		    GDT_String::make('ph_module')->ascii()->max(64)->primary(),
-		    GDT_String::make('ph_method')->ascii()->max(128)->primary(),
-			GDT_UInt::make('ph_hits')->initial('1'),
+		    GDT_String::make('ph_module')->ascii()->caseS()->max(64)->primary(),
+		    GDT_String::make('ph_method')->ascii()->caseS()->max(64)->primary(),
+			GDT_UInt::make('ph_hits')->notNull()->initial('1'),
 		);
 	}
 	
@@ -50,9 +50,19 @@ final class GDO_Statistic extends GDO
 		}
 	}
 	
+	/**
+	 * Return total hits for the whole time in universe.
+	 * Caches the result.
+	 * @return string
+	 */
 	public static function totalHits()
 	{
-		return self::table()->select('SUM(ph_hits)')->first()->exec()->fetchValue();
+	    static $hits;
+	    if ($hits === null)
+	    {
+	        $hits = self::table()->select('SUM(ph_hits)')->first()->exec()->fetchValue();
+	    }
+		return $hits;
 	}
 	
 	public static function todayHits()
