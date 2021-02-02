@@ -34,19 +34,19 @@ final class GDO_Statistic extends GDO
 	public static function pagehit(Method $method)
 	{
 		$day = Time::getDateWithoutTime();
-// 		$url = $_SERVER['REQUEST_URI'];
 
 		if ($row = self::table()->getById($day, mo(), me()))
 		{
-			$row->increase('ph_hits');
+			return $row->increase('ph_hits');
 		}
 		else
 		{
-			self::table()->blank(array(
+			return self::table()->blank([
 				'ph_day' => $day,
-				'ph_module' => mo(),
-			    'ph_method' => me(),
-			))->insert();
+				'ph_module' => $method->getModuleName(),
+			    'ph_method' => $method->getMethodName(),
+			    'ph_hits' => '1',
+			])->insert();
 		}
 	}
 	
@@ -60,7 +60,7 @@ final class GDO_Statistic extends GDO
 	    static $hits;
 	    if ($hits === null)
 	    {
-	        $hits = self::table()->select('SUM(ph_hits)')->first()->exec()->fetchValue();
+	        $hits = self::table()->select('SUM(ph_hits)')->exec()->fetchValue();
 	    }
 		return $hits;
 	}
@@ -68,7 +68,7 @@ final class GDO_Statistic extends GDO
 	public static function todayHits()
 	{
 		$day = Time::getDateWithoutTime();
-		return self::table()->select('SUM(ph_hits)')->where("ph_day='{$day}'")->first()->exec()->fetchValue();
+		return self::table()->select('SUM(ph_hits)')->where("ph_day='{$day}'")->exec()->fetchValue();
 	}
 	
 }
