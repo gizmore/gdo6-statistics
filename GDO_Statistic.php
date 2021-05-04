@@ -12,8 +12,8 @@ use GDO\DB\GDT_UInt;
  * Statistics about called module methods each day.
  * 
  * @author gizmore
- * @version 6.10
- * @since 6.04
+ * @version 6.10.1
+ * @since 6.4.0
  */
 final class GDO_Statistic extends GDO
 {
