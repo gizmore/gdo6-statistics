@@ -3,17 +3,17 @@ namespace GDO\Statistics;
 
 use GDO\Core\GDO;
 use GDO\Core\Method;
-use GDO\Date\GDT_Date;
 use GDO\Date\Time;
 use GDO\DB\GDT_String;
 use GDO\DB\GDT_UInt;
+use GDO\Date\GDT_Date;
 
 /**
  * Statistics about called module methods each day.
  * 
  * @author gizmore
- * @version 6.10.1
- * @since 6.4.0
+ * @version 6.10.2
+ * @since 6.8.0
  */
 final class GDO_Statistic extends GDO
 {
@@ -23,19 +23,21 @@ final class GDO_Statistic extends GDO
 	
 	public function gdoColumns()
 	{
-		return array(
+	    return [
 			GDT_Date::make('ph_day')->primary(),
 		    GDT_String::make('ph_module')->ascii()->caseS()->max(64)->primary(),
 		    GDT_String::make('ph_method')->ascii()->caseS()->max(64)->primary(),
 			GDT_UInt::make('ph_hits')->notNull()->initial('1'),
-		);
+	    ];
 	}
 	
 	public static function pagehit(Method $method)
 	{
 		$day = Time::getDateWithoutTime();
-
-		if ($row = self::table()->getById($day, mo(), me()))
+		$mo = $method->getModuleName();
+		$me = $method->getMethodName();
+		
+		if ($row = self::table()->getById($day, $mo, $me))
 		{
 			return $row->increase('ph_hits');
 		}
@@ -43,8 +45,8 @@ final class GDO_Statistic extends GDO
 		{
 			return self::table()->blank([
 				'ph_day' => $day,
-				'ph_module' => $method->getModuleName(),
-			    'ph_method' => $method->getMethodName(),
+				'ph_module' => $mo,
+			    'ph_method' => $me,
 			    'ph_hits' => '1',
 			])->insert();
 		}

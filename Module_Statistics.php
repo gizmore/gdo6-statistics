@@ -9,9 +9,10 @@ use GDO\UI\GDT_Page;
 
 /**
  * Gather statistics about usage of modules and methods.
+ * 
  * @author gizmore
- * @version 6.10
- * @since 6.08
+ * @version 6.10.2
+ * @since 6.8.0
  */
 final class Module_Statistics extends GDO_Module
 {
