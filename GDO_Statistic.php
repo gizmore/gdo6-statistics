@@ -14,7 +14,7 @@ use GDO\DB\GDT_Enum;
  * Statistics about called module methods each day.
  * 
  * @author gizmore
- * @version 6.10.2
+ * @version 6.10.3
  * @since 6.8.0
  */
 final class GDO_Statistic extends GDO
@@ -83,7 +83,7 @@ final class GDO_Statistic extends GDO
 	        {
     	        $hits = self::table()->select('SUM(ph_hits)')->
     	           exec()->fetchValue();
-    	        Cache::set('statistics_hits', $hits);
+    	        Cache::set('statistics_hits', $hits, 60);
 	        }
 	    }
 		return $hits;
