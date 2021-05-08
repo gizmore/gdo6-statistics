@@ -17,7 +17,7 @@ final class StatisticTest extends TestCase
         GDO_Statistic::pagehit(Impressum::make());
         GDO_Statistic::pagehit(Impressum::make());
         $day = Time::getDateWithoutTime();
-        $hits = GDO_Statistic::getById($day, 'Core', 'Impressum')->getVar('ph_hits');
+        $hits = GDO_Statistic::getById($day, 'GET', 'Core', 'Impressum')->getVar('ph_hits');
         assertEquals($hits, 2, 'Test if page hits are counted correctly.');
     }
     
