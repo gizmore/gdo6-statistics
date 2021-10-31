@@ -2,7 +2,6 @@
 namespace GDO\Statistics;
 
 use GDO\Core\GDO_Module;
-use GDO\Core\GDT_Response;
 use GDO\Core\Method;
 use GDO\DB\GDT_Checkbox;
 use GDO\UI\GDT_Tooltip;
@@ -12,7 +11,7 @@ use GDO\UI\GDT_Page;
  * Gather statistics about usage of modules and methods.
  * 
  * @author gizmore
- * @version 6.10.3
+ * @version 6.10.6
  * @since 6.8.0
  */
 final class Module_Statistics extends GDO_Module
@@ -21,6 +20,7 @@ final class Module_Statistics extends GDO_Module
 	{
 	    return [
 	        GDO_Statistic::class,
+	    	GDO_Coverage::class,
 	    ];
 	}
 	
