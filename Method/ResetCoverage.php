@@ -2,6 +2,7 @@
 namespace GDO\Statistics\Method;
 
 use GDO\Form\GDT_Submit;
+use GDO\Form\MethodButtonBar;
 
 final class ResetCoverage extends MethodButtonBar
 {

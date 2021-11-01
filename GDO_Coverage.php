@@ -4,7 +4,6 @@ namespace GDO\Statistics;
 use GDO\Core\GDO;
 use GDO\DB\GDT_String;
 use GDO\DB\GDT_UInt;
-use GDO\DB\GDT_CreatedAt;
 
 /**
  * Count method invocations to identify dead or hot code.
@@ -12,12 +11,24 @@ use GDO\DB\GDT_CreatedAt;
  */
 final class GDO_Coverage extends GDO
 {
+	public function gdoEngine() { return GDO::MYISAM; }
+	
+	public function gdoCached() { return false; }
+	
 	public function gdoColumns()
 	{
 		return [
-			GDT_String::make('coverage_method')->caseS()->ascii()->max(96)->primary(),
-			GDT_UInt::make('coverage_calls'),
+			GDT_String::make('coverage_method')->caseS()->ascii()->max(96),
 		];
+	}
+	
+	/**
+	 * Count up
+	 * @param string $classname
+	 */
+	public static function called($classname)
+	{
+		
 	}
 	
 }
