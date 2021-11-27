@@ -3,7 +3,6 @@ namespace GDO\Statistics;
 
 use GDO\Core\GDO;
 use GDO\DB\GDT_String;
-use GDO\DB\GDT_UInt;
 
 /**
  * Count method invocations to identify dead or hot code.
